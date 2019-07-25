@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en-US">
- 
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
 </script>
- 
+
+<style>
+input.ng-invalid{
+  background-color: lightblue;
+}
+</style>
 <body>
 
-<div ng-app="myapp" ng-controller='myCtrl' >   
-	{{name}}
+<div ng-app="myapp" ng-controller='myCtrl' >
+	<h1 ng-click="changeName()">{{name}}</h1>
 	<my-Directive></my-Directive>
 	<li ng-repeat = "x in names">
 		{{x.name+ ' , ' +x.country}}
-	</li> 
-	
+	</li>
+
+  <form name='myForm'>
+    <input type = 'email' name = "myAddress" ng-model = 'myemail' required></input>
+    <span ng-show='myForm.myAddress.$error.email'>Not a valid e-mail address</span>
+    <span ng-show='!myForm.myAddress.$valid'>Cannot be empty</span>
+  </form>
+<select ng-model ='selectName' ng-options = 'x.name for x in names'></select>
+{{selectName.name + "   "+selectName.country}}
 </div>
 <script src = 'myapp.js'></script>
 <script src = 'myCtrl.js'></script>
 <script src = 'myDirective.js'></script>
-
 </body>
 </html>
